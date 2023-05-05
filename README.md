@@ -1,4 +1,4 @@
-# whatsapp_api
+# whatsapp_api : https://developers.facebook.com/blog/post/2022/10/31/sending-messages-with-whatsapp-in-your-nodejs-application/?d=%7B%22u%22%3A100024373305763%2C%22f%22%3A207799259245384%2C%22t%22%3A1683303827%2C%22ed%22%3A[]%7D&s=AWXi-NFZEj_Z1uOw5KQ
 
 Back to News for Developers
 Search News
