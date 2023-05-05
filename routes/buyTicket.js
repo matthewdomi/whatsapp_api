@@ -1,27 +1,29 @@
-var express = require('express');
+express = require('express');
 var router = express.Router();
 var bodyParser = require('body-parser');
 require('dotenv').config();
-const { sendMessage, getTextMessageInput } = require('../messageHelper');
+var { movies } = require('../public/javascripts/movies');
+const { sendMessage, getTemplatedMessageInput } = require('../messageHelper');
 
 router.use(bodyParser.json());
 
 router.post('/', function (req, res, next) {
-  var data = getTextMessageInput(
+  var movie = movies.filter((v, i) => v.id == req.body.id)[0];
+
+  var data = getTemplatedMessageInput(
     process.env.RECIPIENT_WAID,
-    'Welcome to the Movie Ticket Demo App for Node.js!'
+    movie,
+    req.body.seats
   );
 
   sendMessage(data)
     .then(function (response) {
       res.redirect('/catalog');
-      // res.redirect('/');
       res.sendStatus(200);
       return;
     })
     .catch(function (error) {
       console.log(error);
-      console.log(error.response.data);
       res.sendStatus(500);
       return;
     });

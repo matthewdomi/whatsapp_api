@@ -27,7 +27,58 @@ function getTextMessageInput(recipient, text) {
   });
 }
 
+function getTemplatedMessageInput(recipient, movie, seats) {
+  return JSON.stringify({
+    messaging_product: 'whatsapp',
+    to: recipient,
+    type: 'template',
+    template: {
+      name: 'sample_movie_ticket_confirmation',
+      language: {
+        code: 'en_US',
+      },
+      components: [
+        {
+          type: 'header',
+          parameters: [
+            {
+              type: 'image',
+              image: {
+                link: movie.thumbnail,
+              },
+            },
+          ],
+        },
+        {
+          type: 'body',
+          parameters: [
+            {
+              type: 'text',
+              text: movie.title,
+            },
+            {
+              type: 'date_time',
+              date_time: {
+                fallback_value: movie.time,
+              },
+            },
+            {
+              type: 'text',
+              text: movie.venue,
+            },
+            {
+              type: 'text',
+              text: seats,
+            },
+          ],
+        },
+      ],
+    },
+  });
+}
+
 module.exports = {
   sendMessage: sendMessage,
   getTextMessageInput: getTextMessageInput,
+  getTemplatedMessageInput: getTemplatedMessageInput,
 };
